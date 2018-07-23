@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<kml xmlns='http://www.opengis.net/kml/2.2'>
+	<Document>
+		<name>Tracks</name>
+		<Placemark>
+			<name>Dojazd z ronda do Chaty Olenderskiej</name>
+			<description><![CDATA[Droga gruntowa]]></description>
+			<styleUrl>#line-A61B4A-3</styleUrl>
+			<ExtendedData>
+			</ExtendedData>
+			<LineString>
+				<tessellate>1</tessellate>
+				<coordinates>17.389689,52.454281,0.0 17.399905,52.456729,0.0 17.400279,52.457032,0.0 17.401187,52.459124,0.0 17.402678,52.46066,0.0 17.409206,52.464568,0.0 17.410353,52.464986,0.0 17.411597,52.464919,0.0 17.41409,52.466719,0.0 17.415535,52.466392,0.0 17.41622,52.465833,0.0 17.415919,52.465695,0.0</coordinates>
+			</LineString>
+		</Placemark>
+		<Style id='line-A61B4A-3-normal'>
+			<LineStyle>
+				<color>ff4A1BA6</color>
+				<width>5</width>
+			</LineStyle>
+		</Style>
+		<Style id='line-A61B4A-3-highlight'>
+			<LineStyle>
+				<color>ff4A1BA6</color>
+				<width>5</width>
+			</LineStyle>
+		</Style>
+		<StyleMap id='line-A61B4A-3'>
+			<Pair>
+				<key>normal</key>
+				<styleUrl>#line-A61B4A-3-normal</styleUrl>
+			</Pair>
+			<Pair>
+				<key>highlight</key>
+				<styleUrl>#line-A61B4A-3-highlight</styleUrl>
+			</Pair>
+		</StyleMap>
+	</Document>
+</kml>

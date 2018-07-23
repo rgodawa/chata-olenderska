@@ -1,0 +1,47 @@
+<?php
+function generateGallery($path, $group_class)
+{
+	$menu = simplexml_load_file($path . "images.xml");
+	foreach($menu->children() as $child)
+	{
+		$id = rand(0,10);
+		echo "<li class='item-thumbs col-sm-4 col-md-3 col-xs-6 design' data-id='id-" . $id . "' data-type='" . $group_class . "'>" .
+		"<a class='hover-wrap fancybox_gallery' data-fancybox-group='gallery' title='"  . "' data-fancybox-href='" . $path . $child->link . "'>" .
+		"<span class='overlay-img'></span>" .
+		"<span class='overlay-img-thumb font-icon-plus'></span>" .
+		"</a>" .
+		"<img src='" . $path . "small/" . $child->link . "'" . 
+		" width='260' height='195' alt='" . $child->title . "'>" .
+		"</li>";
+	}
+}
+?>
+<ul id='thumbs' class='portfolio'>
+	<?php generateGallery('img/cottage/', 'cottage'); ?>
+	<!-- Item Project and Filter Name -->
+	<li class='item-thumbs col-sm-4 col-md-3 col-xs-6 design' data-id='id-100' data-type='cottage'>
+	<!-- Fancybox - Gallery Enabled - Title - Full Image -->
+	<a class='hover-wrap fancybox fancybox.iframe' data-fancybox-group='gallery' title='Chata film' data-fancybox-href='//www.youtube.com/embed/-I8uaRq6gxk?autoplay=1&modestbranding=1&rel=0'>
+	<span class='overlay-img'></span>
+	<span class='overlay-img-thumb font-icon-play'></span>
+	</a>
+	<!-- Thumb Image and Description -->
+	<img src='//img.youtube.com/vi/-I8uaRq6gxk/hqdefault.jpg' width='260' height='195' alt=''>
+	</li>
+	<!-- End Item Project -->
+	<div class='hidden'>
+		<?php generateGallery('img/summer-house/', 'summer-house'); ?>
+		<?php generateGallery('img/garden/', 'garden'); ?>
+		<!-- Item Project and Filter Name -->
+		<li class='item-thumbs col-sm-4 col-md-3 col-xs-6 design' data-id='id-100' data-type='garden'>
+		<!-- Fancybox - Gallery Enabled - Title - Full Image -->
+		<a class='hover-wrap fancybox fancybox.iframe' data-fancybox-group='gallery' title='Ogród latem' data-fancybox-href='//www.youtube.com/embed/OGcbJgsfHms?autoplay=1&modestbranding=1&rel=0'>
+		<span class='overlay-img'></span>
+		<span class='overlay-img-thumb font-icon-play'></span>
+		</a>
+		<!-- Thumb Image and Description -->
+		<img src='//img.youtube.com/vi/OGcbJgsfHms/hqdefault.jpg' width='260' height='195' alt=''>
+		</li>
+	<!-- End Item Project -->
+	</div>	
+</ul>

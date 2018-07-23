@@ -1,0 +1,60 @@
+<?php
+function generateSlides()
+{
+  $cloud_url = 'https://res.cloudinary.com/rall/image/fetch/';
+  $flickr = 'https://farm6.staticflickr.com/';
+	$menu = simplexml_load_file("img/slides/slides.xml");
+  $row = 1;
+	echo "<ul class='slides'>";
+	foreach($menu->children() as $child)
+	{
+		echo '<li><img ' . (($row != 1) ? 'class="lazy" data-src' : 'src') .'="' . $cloud_url . $flickr . $child->flickr_link . '" alt="' . strip_tags($child->title) . '" width="800" height="450">' .
+		'<div class="flex-caption">' . 
+		'<p>' . $child->title . '</p>' . 
+		'</div></li>';
+    $row++; 	
+	}
+	echo "</ul>";
+}
+?>
+<div class='flexslider'>
+  <?php generateSlides(); ?>
+</div>
+<script>
+$(window).load(function() {
+  $('.flexslider').flexslider({
+    touch: true,
+    slideshow: true,
+    controlNav: true,
+    slideshowSpeed: 4000,
+    animationSpeed: 600,
+    initDelay: 0,
+    start: function(slider) { // Fires when the slider loads the first slide
+      var slide_count = slider.count - 1;
+      $(slider)
+        .find('img.lazy:eq(0)')
+        .each(function() {
+          var src = $(this).attr('data-src');
+          $(this).attr('src', src).removeAttr('data-src');
+        });
+    },
+    before: function(slider) { // Fires asynchronously with each slider animation
+      var slides     = slider.slides,
+          index      = slider.animatingTo,
+          $slide     = $(slides[index]),
+          $img       = $slide.find('img[data-src]'),
+          current    = index,
+          nxt_slide  = current + 1,
+          prev_slide = current - 1;
+      $slide
+        .parent()
+        .find('img.lazy:eq(' + current + '), img.lazy:eq(' + prev_slide + '), img.lazy:eq(' + nxt_slide + ')')
+        .each(function() {
+          var src = $(this).attr('data-src');
+          $(this).attr('src', src).removeAttr('data-src');
+        });
+    }
+  });
+});
+</script>
+

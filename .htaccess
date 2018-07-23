@@ -1,0 +1,27 @@
+DirectoryIndex index.php
+ErrorDocument 404 /
+
+RewriteEngine on
+
+#RewriteCond %{HTTP_HOST} ^(www\.)?blog.chata-olenderska\.pl [NC]
+#RewriteRule (.*) https://chata-olenderska.pl/$1 [R=301,L]
+
+#RewriteCond %{THE_REQUEST} ^.*/index\.php 
+#RewriteRule ^(.*)index.php$ /$1 [R=301,L] 
+
+#RewriteCond %{HTTP:X-Forwarded-Proto} !https
+#RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
+
+RewriteRule ^strona-glowna$ index.php [L,NC]
+RewriteRule ^kalendarz$ calendar.php [L,NC]
+RewriteRule ^oferta$ offer.php [L,NC]
+RewriteRule ^galeria$ portfolio.php [L,NC]
+RewriteRule ^galeria-([^-]*)$ portfolio.php?fltr=$1 [L,NC]
+RewriteRule ^blog$ wordpress/?page_id=88 [L,NC]
+RewriteRule ^ksiega-gosci$ wordpress/?page_id=23 [L,NC]
+RewriteRule ^kontakt$ contact.php [L,NC]
+RewriteRule ^vcard$ downloadvcard.php [L,NC]
+RewriteRule ^poczta$ mailto:kontakt@chata-olenderska.pl [L,NC]
+
+RewriteRule ^nano$ nano.php [L,NC]
+

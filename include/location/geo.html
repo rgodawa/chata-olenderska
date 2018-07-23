@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang='pl-PL'>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Chata olenderska - dojazd</title>
+    <style type="text/css">
+      html, body { height: 100%; margin: 0; padding: 0; }
+      #map { height: 80%; }
+    </style>
+    
+    <script>
+     
+      function initGeolocation() {
+        if (navigator && navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+        } else {
+          console.log('Geolocation is not supported');
+        }
+      }
+     
+      function errorCallback() {}
+     
+      function successCallback(position) {             
+        var myStart = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);      
+        var myEnd = new google.maps.LatLng(52.454281, 17.389689); // rondo Wierzyce  52.454281, 17.389689
+        var myChata = new google.maps.LatLng(52.465673, 17.415728);
+        var myBounds = new google.maps.LatLngBounds(myStart, myChata);
+        
+      
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: myStart,
+          zoom: 10
+        });
+        
+        
+        addKml();
+        myRoute();
+        myDistance();
+        
+        map.setCenter(myBounds.getCenter());
+        map.fitBounds(myBounds);
+        
+        
+        
+        
+        
+        
+       
+        function myRoute() { 
+          var directionsService = new google.maps.DirectionsService();
+          var directionsDisplay = new google.maps.DirectionsRenderer();
+          var request = {
+            origin: myStart,
+            destination: myEnd,
+            travelMode: google.maps.TravelMode.DRIVING,
+            unitSystem: google.maps.UnitSystem.METRIC,
+            avoidHighways: false,
+            avoidTolls: false
+          };
+          directionsService.route(request, function (response, status) {
+                                  if (status == google.maps.DirectionsStatus.OK) { 
+                                      directionsDisplay.setDirections(response);
+                                      directionsDisplay.setMap(map);
+                                      directionsDisplay.setOptions( { suppressMarkers: true } );
+                                      var route = response.routes[0];
+                                      var start = route.legs[0].start_location;
+                                      var end = route.legs[0].end_location;                                                                     
+                                      addMarker(start, "Start", 'https://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png');
+                                      addMarker(end, "Wierzyce rondo - kierunek Przyborowo 3km droga gruntowa", 'https://maps.gstatic.com/mapfiles/ms2/micons/yellow-dot.png');
+                                      addMarker({lat: 52.456707, lng: 17.399965}, "Rozwidlenie - skręcamy w lewo", 'https://maps.gstatic.com/mapfiles/ms2/micons/blue-dot.png');
+                                      addMarkerChata();
+  
+                                  } else {
+                                      alert("Directions Request from " + start.toUrlValue(6) + " to " + end.toUrlValue(6) + " failed: " + status);
+                                  }
+                              });
+                        
+        
+         } 
+        
+        
+        //****************Markery***************************** 
+        
+        
+        function addMarker(myPosition, myTitle, myIcon ){
+          var marker = new google.maps.Marker({
+              position: myPosition, 
+              map: map,
+              title: myTitle, 
+              icon: myIcon
+              });
+          attachMessage(marker, myTitle);
+          marker.setAnimation(google.maps.Animation.DROP);
+        }       
+                
+        function addMarkerChata(){
+          var servicePlaces = new google.maps.places.PlacesService(map);
+          servicePlaces.getDetails({
+              placeId: 'ChIJFfFw_ECNBEcRGnvT7Kz_sA8'
+          }, function (result, status) {
+              var marker = new google.maps.Marker({
+                  map: map,
+                  icon: 'chata.png',
+                  title: "Chata Olenderska",
+                  position: result.geometry.location
+              });
+              attachMessage(
+                marker, 
+                '<div><strong>' + result.name + '</strong><br>' +
+                '<br/><a target="_blank" href="https://www.chata-olenderska.pl/" title="www.chata-olenderska.pl"><img src="https://chata-olenderska.pl/img/cottage/small/9.jpg" width="260" height="195" /></a><br/>' +
+                result.formatted_address + '<br />' + '<br />' +
+                //'<a target="_blank" href="https://www.chata-olenderska.pl/">chata-olenderska.pl</a>' + '<br />' + '<br />' +
+                result.formatted_phone_number + '</div>'                
+                );
+              marker.setAnimation(google.maps.Animation.DROP);
+              //marker.setAnimation(google.maps.Animation.BOUNCE);
+          }); 
+        }
+        
+        
+        function attachMessage(marker, myMessage) {
+          var infowindow = new google.maps.InfoWindow({
+            content: myMessage
+          });
+        
+          marker.addListener('click', function() {
+            infowindow.open(marker.get('map'), marker);
+          });
+        }
+        
+        //***************Dojazd z ronda do chaty
+        function addKml(){
+          var ctaLayer = new google.maps.KmlLayer({
+            url: 'https://chata-olenderska.pl/geolocation/Tracks.kml',
+            map: map
+          });
+        }
+    
+                
+      
+           
+        //*********DISTANCE AND DURATION**********************//
+        function myDistance() {
+          var serviceDistance = new google.maps.DistanceMatrixService();
+          serviceDistance.getDistanceMatrix({
+              origins: [myStart],
+              destinations: [myEnd],
+              travelMode: google.maps.TravelMode.DRIVING,
+              unitSystem: google.maps.UnitSystem.METRIC,
+              avoidHighways: false,
+              avoidTolls: false
+          }, function (response, status) {
+              if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS") {
+                  var distance = response.rows[0].elements[0].distance.text;
+                  var duration = response.rows[0].elements[0].duration.text;
+                  var dvDistance = document.getElementById("dvDistance");
+                  dvDistance.innerHTML = "";
+                  dvDistance.innerHTML += "Odleglosc: " + distance + "<br/>";
+                  dvDistance.innerHTML += "Czas dojazdu:" + duration;
+       
+              } else {
+                  alert("Unable to find the distance via road.");
+              }
+          });
+        } 
+           
+                                    
+    }
+    </script>
+  </head>
+  <body>
+    <div id="map"></div>
+    <br/>
+    <div id="dvDistance"></div>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFUba6KgvQJam9zMzVVbAb6C-BkRoj5fs&libraries=geometry,places&callback=initGeolocation">
+    </script>
+  </body>
+</html>
