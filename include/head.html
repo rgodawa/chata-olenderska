@@ -1,4 +1,21 @@
 <?php
+$headerCSP = "Content-Security-Policy:".
+    "connect-src 'self';".
+    "default-src 'self';".
+    "frame-ancestors 'self';". 
+    "frame-src https://web.facebook.com/ https://www.facebook.com/ https://staticxx.facebook.com/ http://staticxx.facebook.com/ https://www.youtube.com/ https://www.google.com/;". 
+    "media-src 'self';". 
+    "object-src 'none'; " . 
+    "img-src 'self' https://www.google-analytics.com/r/collect https://www.google-analytics.com/collect http://static.rall.pl/images/ *.cloudinary.com *.youtube.com;" .        
+    "script-src 'self' https://code.jquery.com/jquery-1.9.1.min.js https://www.google-analytics.com/analytics.js https://maxcdn.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js http://connect.facebook.net/pl_PL/sdk.js 'sha256-VLw9OrmX3bvQDyhq/weIrYnN1Mn5IQCjjuDYW+xu6ew=' 'sha256-Q+zQt8TtLsGAC4n45kLUC39oh7Bvb3mkGdF0cjDwuLQ=' 'sha256-9dY/cSWGPPx9v08maTIfP9nI5jJeKHgha3RwDULN66A=' 'sha256-MJ7pWO+xCEz/7Gf4m5wlL64ppkrV/jiTQmEtStpB2BI=' 'sha256-Do33d3mEi0KCcfnkzXhes6bHc1zsZWtACrgem7povdk=';" .
+    
+    "font-src 'self' https://maxcdn.bootstrapcdn.com/bootstrap/3.1.0/fonts/ https://fonts.gstatic.com/;" .
+
+    "style-src 'self' https://maxcdn.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css https://fonts.googleapis.com/css 'sha256-GAi+Ldn91z47rA1xHn5FobkYa4/KDRa32atszLdYEOg=' 'sha256-R5Xn4FecL0VHeCqaMPR1eWy6vnuGTSBNMaZGq3dBJ1U=' 'sha256-W2kUcrmSyYrtLKKok5R0tuGKVjGmCtnA6wr7AIdSwgU=';";
+header($headerCSP);
+header('X-Frame-Options: SAMEORIGIN');
+?>
+<?php
 header_remove('x-powered-by'); 
 header('X-UA-Compatible: IE=edge');
 header('X-Content-Type-Options: nosniff');
@@ -16,12 +33,22 @@ header('strict-transport-security: max-age=31536000; includeSubDomains');
 <link rel="dns-prefetch" href="//facebook.com">
 <link rel="dns-prefetch" href="//static.xx.fbcdn.net">
 <link rel="dns-prefetch" href="//static.rall.pl">
-<link href='//maxcdn.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css' rel='stylesheet' />
-<link href='//fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700%7COpen+Sans:300,400,600,700' rel='stylesheet'/>
-<link href="css/minified.css.php" rel="stylesheet">
-<script src="js/jquery.min.js"></script>
-<script async src='//maxcdn.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js'></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" integrity="sha384-GYBZMlEOunzhR/VZ6XhlOir+4wC0SyDpSIotW0oxJizkK/V2czMG1GvOmuRiNUNP" crossorigin="anonymous">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700%7COpen+Sans:300,400,600,700%27">
+<link rel="stylesheet" href="css/minified.css.php">
+<link rel="stylesheet" href="css/style.2.css?v=<?php echo filemtime("css/style.2.css")?>">
+
+<script 
+    src="https://code.jquery.com/jquery-1.9.1.min.js"
+    integrity="sha384-EaUkI/FiMJtEXWAl0dCczvbFvjfzsIF1UNKGJvu9p5JIG71Kih7/kQJvYbBL7HOn" 
+    crossorigin="anonymous">
+</script>
+<script     
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"
+    integrity="sha384-7pPmvaV7JjM/wsobVyDu9o+X6ETgKe/Yp7VfxVr7OiOEnkvzsQB8LfBqMXnbTIht" 
+    crossorigin="anonymous">
+</script>
 <!--[if lt IE 9]>
 <script src='http://html5shim.googlecode.com/svn/trunk/html5.js'></script>
 <![endif]-->
-<script>(function(d,e,j,h,f,c,b){d.GoogleAnalyticsObject=f;d[f]=d[f]||function(){(d[f].q=d[f].q||[]).push(arguments)},d[f].l=1*new Date();c=e.createElement(j),b=e.getElementsByTagName(j)[0];c.async=1;c.src=h;b.parentNode.insertBefore(c,b)})(window,document,"script","//www.google-analytics.com/analytics.js","ga");ga("create","UA-68148764-1","auto");ga("send","pageview");</script>
+<script>(function(d,e,j,h,f,c,b){d.GoogleAnalyticsObject=f;d[f]=d[f]||function(){(d[f].q=d[f].q||[]).push(arguments)},d[f].l=1*new Date();c=e.createElement(j),b=e.getElementsByTagName(j)[0];c.async=1;c.src=h;b.parentNode.insertBefore(c,b)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create","UA-68148764-1","auto");ga("send","pageview");</script>

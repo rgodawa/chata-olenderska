@@ -1,3 +1,20 @@
+.about_row {
+    margin-bottom:5px !important;
+}
+
+
+.about_text {
+    text-align:justify;
+}
+
+.about_text p {
+    text-indent: 30px;
+}
+
+.fb-share-button {
+    float:right;
+}
+
 /*====================================
 tooltip
 ====================================*/
@@ -226,6 +243,7 @@ header .navbar {
 	letter-spacing: 0px;
     margin-top: 28px;
     padding: 0 0 0 15px;
+    font-family:LainieDay;
 }
 
 .navbar-brand > img {
@@ -508,6 +526,35 @@ section.callaction {
 	background: #DD974B;
 	color: #FFFFFF;
 	padding: 20px 20px 20px;
+}
+
+.margin-bottom-0 {
+    margin-bottom: 0px !important;
+}
+
+.box-email {
+    padding: 20px 20px 10px;
+    color: #333;  
+    text-align: center;
+}
+
+.box-contact {
+    padding: 20px 20px 10px;
+    text-align: center;
+}
+
+.list-group {
+    line-height: 2em;
+}
+
+.box-offer {
+    padding: 20px 60px 20px;      
+}.box-offer ul {
+    list-style-type:circle;      
+}
+
+.box-offer h4, h5 {
+    margin-bottom:5px !important;      
 }
 
 
@@ -1747,6 +1794,11 @@ ul.social-network li {
 .copyright {
 	text-align:center;
 	font-size:1.1em;
+    
+}
+
+.copyright p {
+    color:#FFFFFF;
 }
 
 #sub-footer ul.social-network {
@@ -1831,13 +1883,14 @@ section.demogrid .col-lg-12.nest {
 
 
 /* scroll to top */
-.scrollup{
+.scrollup {
     position:fixed;
 	width:32px;
 	height:32px;
     bottom:0px;
     right:20px;
 	background: #222;
+    display:none;
 	/*background: #D4D4D4;*/
 	
 }
@@ -2180,3 +2233,15 @@ article img.pull-right, article .align-right{
 
 }
 	
+
+.chlewik-text {
+    text-align:justify;
+}
+
+.chlewik-text p {
+    text-indent: 30px;;
+}
+
+.konto {
+  color:#600505;
+}

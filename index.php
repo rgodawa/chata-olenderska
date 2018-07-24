@@ -37,7 +37,7 @@
 <div class=solidline></div>
 </div>
 </div>
-<div class=row style=margin-bottom:5px>
+<div class="row about_row">
 <div class=col-lg-12>
 <div class=row>
 <section id=projects>
@@ -69,14 +69,14 @@
 <div class=row>
 <div class=col-md-8></div>
 <div class=col-md-4>
-<div class=fb-share-button style=float:right data-href=https://chata-olenderska.pl/ data-layout=button></div>
+<div class=fb-share-button data-href=https://chata-olenderska.pl/ data-layout=button></div>
 </div>
 </div>
 </div>
 </section>
 <footer id=footer><?php include 'include/footer.html'; ?></footer>
 </div>
-<a href=# class=scrollup style=display:none><i class='fa fa-angle-up active'></i></a>
+<a href=# class=scrollup><i class='fa fa-angle-up active'></i></a>
 <script src=js/minified.js.index.php></script>
 <?php include 'include/facebook.html'; ?>
 <script>jQuery(document).ready(function(a){a(window).scroll(function(){if(a(this).scrollTop()>100){a(".scrollup").fadeIn()}else{a(".scrollup").fadeOut()}});a(".scrollup").click(function(){a("html, body").animate({scrollTop:0},1000);return false})});</script>

@@ -3,11 +3,11 @@ ErrorDocument 404 /
 
 RewriteEngine on
 
-#RewriteCond %{HTTP_HOST} ^(www\.)?blog.chata-olenderska\.pl [NC]
-#RewriteRule (.*) https://chata-olenderska.pl/$1 [R=301,L]
+RewriteCond %{HTTP_HOST} ^(www\.)?blog.chata-olenderska\.loc [NC]
+RewriteRule (.*) https://chata-olenderska.loc/$1 [R=301,L]
 
-#RewriteCond %{THE_REQUEST} ^.*/index\.php 
-#RewriteRule ^(.*)index.php$ /$1 [R=301,L] 
+RewriteCond %{THE_REQUEST} ^.*/index\.php 
+RewriteRule ^(.*)index.php$ /$1 [R=301,L] 
 
 #RewriteCond %{HTTP:X-Forwarded-Proto} !https
 #RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]

@@ -11,7 +11,7 @@ ob_start("compress");
       // Remove space after colons
       $minify = str_replace(': ', ':', $minify);
       /* remove tabs, spaces, newlines, etc. */
-    	$minify = str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    ', '    '), '', $minify);
+        $minify = str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    ', '    '), '', $minify);
 
       return $minify;
     }
@@ -24,5 +24,5 @@ ob_start("compress");
     include('overwrite.1.css');
     include('animate.css');
     include('skins/default.css');
-    include('style.2.css');
+    //include('style.2.css');
 ob_end_flush();
